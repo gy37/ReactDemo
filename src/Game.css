@@ -1,0 +1,62 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;/*实现类似table的布局*/
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;/*使相邻的边线重叠，否则太宽了*/
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;/*取消button点击方框效果*/
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;/*弹性布局*/
+  flex-direction: row;/*定义主轴为水平方向*/
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.select-text {
+  font-weight: bold;/* 2.在历史记录列表中加粗显示当前选择的项目。*/
+}
+
+.history-info {
+  margin-left: 20px;
+}
+
+.one-line {
+  color: yellow;
+}

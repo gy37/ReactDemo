@@ -114,7 +114,7 @@ export class Reservation extends React.Component {
 					<input name="isGoing" 
 						type="checkbox"
 						checked={this.state.isGoing} 
- 						onChange={this.handleInputChange} />
+						onChange={this.handleInputChange} />
 				</label>
 				<br />
 				<label>
