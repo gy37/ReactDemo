@@ -4,7 +4,7 @@ import './Game.css';
 
 function Square(props) {//如果组件中只包含一个render方法，并且不包含state，那么使用函数组件就会更简单
   return (//点击按钮时，调用父组件的onClick方法
-    <button className="square" onClick={props.onClick}>
+    <button className={props.isLine ? "square one-line" : "square"} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -17,6 +17,7 @@ class Board extends React.Component {
         key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        isLine={this.props.line && this.props.line.indexOf(i) !== -1}
       />
     );
   }
@@ -87,7 +88,10 @@ export class Game extends React.Component {
     for (let i = 0; i < lines.length; i++) {//遍历每一种情况
       const [a, b, c] = lines[i];//某一种情况相同点的位置
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {//squares中指定位置[a,b,c]的值相等
-        return squares[a];
+        return {
+          winner: squares[a],
+          line: [a, b, c]
+        };
       }
     }
     return null;
@@ -127,9 +131,11 @@ export class Game extends React.Component {
 
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
+      status = 'Winner: ' + winner.winner;
+    } else if (history.length < 9) {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    } else {
+      status = 'No Winner';
     }
     return (
       <div className="game">
@@ -137,6 +143,7 @@ export class Game extends React.Component {
           <Board 
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
+            line={winner ? winner.line : null}
           />
         </div>
         <div className="game-info">
